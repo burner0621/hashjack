@@ -1,0 +1,97 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "latest",
+    "@emotion/styled": "latest",
+    "@hashgraph/sdk": "^2.22.0",
+    "@mui/icons-material": "^5.10.6",
+    "@mui/joy": "^5.0.0-alpha.47",
+    "@mui/lab": "^5.0.0-alpha.95",
+    "@mui/material": "latest",
+    "@nivo/core": "^0.80.0",
+    "@nivo/pie": "^0.80.0",
+    "@reduxjs/toolkit": "^1.9.0",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "apexcharts": "^3.35.5",
+    "cids": "^1.1.9",
+    "createjs": "^1.0.1",
+    "easystarjs": "^0.4.4",
+    "flowbite": "^1.6.4",
+    "flowbite-react": "^0.4.3",
+    "gulp": "4.0.2",
+    "gulp-append-prepend": "1.0.9",
+    "howler": "^2.2.3",
+    "jquery": "^3.6.4",
+    "moment": "2.29.4",
+    "mui-image": "^1.0.7",
+    "nouislider": "15.1.0",
+    "phaser": "^3.55.2",
+    "protobufjs": "^7.0.0",
+    "react": ">=16.8.0",
+    "react-alert": "^7.0.3",
+    "react-alert-template-basic": "^1.0.2",
+    "react-apexcharts": "^1.4.0",
+    "react-bootstrap": "^2.6.0",
+    "react-bootstrap-switch": "15.5.3",
+    "react-bottom-scroll-listener": "^5.1.0",
+    "react-datetime": "3.1.1",
+    "react-dom": ">=16.8.0",
+    "react-minimal-pie-chart": "^8.4.0",
+    "react-modal": "^3.16.1",
+    "react-qr-code": "^2.0.7",
+    "react-redux": "^8.0.2",
+    "react-responsive-carousel": "^3.2.23",
+    "react-router-dom": "5.2.0",
+    "react-scripts": "^5.0.1",
+    "react-tinder-card": "^1.4.5",
+    "react-toastify": "^9.1.1",
+    "react-vertical-timeline-component": "^3.5.2",
+    "reactstrap": "8.9.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.4.2",
+    "sass": "1.54.0",
+    "socket.io": "^4.5.3",
+    "socket.io-client": "^4.5.3",
+    "styled-components": "^5.3.5",
+    "sweetalert2": "^11.6.15",
+    "tailwindcss": "^3.2.7"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
+    "compile-sass": "sass src/assets/scss/now-ui-kit.scss src/assets/css/now-ui-kit.css",
+    "minify-sass": "sass src/assets/scss/now-ui-kit.scss src/assets/css/now-ui-kit.min.css --style compressed"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "optionalDependencies": {
+    "@babel/core": "7.18.9",
+    "typescript": "4.7.4"
+  },
+  "devDependencies": {
+    "hashconnect": "^0.1.7"
+  }
+}

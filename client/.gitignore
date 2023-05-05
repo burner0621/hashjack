@@ -1,0 +1,12 @@
+node_modules
+node_modules__
+build
+@mui.rar
+1.txt
+degenland-frontend-react-phaser-hedera.rar
+degenland.zip
+degenland-node-module.tar.gz
+yarn-error.log
+.firebase
+.firebaserc
+firebase.json

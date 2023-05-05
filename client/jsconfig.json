@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "baseUrl": "src",
+    "paths": {
+      "*": [
+        "src/*"
+      ],
+      "assets": [
+        "src/assets"
+      ]
+    },
+    "lib": [
+      "ES2018"
+    ]
+  }
+}

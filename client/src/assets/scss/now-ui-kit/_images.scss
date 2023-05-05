@@ -1,0 +1,12 @@
+img {
+    max-width: 100%;
+    border-radius: 1px;
+}
+
+.img-raised {
+    // box-shadow: $box-shadow-raised;
+}
+
+.img-raised:hover {
+    box-shadow: $box-shadow-raised;
+}

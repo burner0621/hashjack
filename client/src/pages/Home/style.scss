@@ -1,0 +1,161 @@
+.home-container {
+    height: 100vh;
+    background-image: url("../../assets/imgs/front/home-background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+
+    .home-wrapper {
+        height: 100%;
+
+        .title-image {
+            position: absolute;
+            width: 70vw;
+            min-width: 500px;
+            max-width: 1280px;
+            left: 50vw;
+            top: 150px;
+            -webkit-animation: titleAnimation 7s linear infinite;
+            animation: titleAnimation 7s linear infinite;
+        }
+
+        .rocket-image {
+            position: absolute;
+            width: 70vw;
+            min-width: 500px;
+            max-width: 1280px;
+            left: 50vw;
+            top: 150px;
+            -webkit-animation: rocketAnimation 7s linear infinite;
+            animation: rocketAnimation 7s linear infinite;
+        }
+
+        .earth-land-image {
+            position: absolute;
+            width: 50vw;
+            min-width: 500px;
+            max-width: 1000px;
+            left: 50vw;
+            bottom: 0;
+            -webkit-animation: earthAnimation 5s linear infinite;
+            animation: earthAnimation 5s linear infinite;
+        }
+
+        .cloud-2-image {
+            position: absolute;
+            top: 20px;
+            right: 50vw;
+            -webkit-animation: cloudAnimation 15s linear infinite;
+            animation: cloudAnimation 15s linear infinite;
+        }
+
+        .cloud-1-image {
+            position: absolute;
+            top: 40vh;
+            left: 10vw;
+            -webkit-animation: cloudAnimation 12s linear infinite;
+            animation: cloudAnimation 12s linear infinite;
+        }
+
+        .cloud-3-image {
+            position: absolute;
+            bottom: 350px;
+            right: 10vw;
+            -webkit-animation: cloudAnimation 10s linear infinite;
+            animation: cloudAnimation 10s linear infinite;
+        }
+
+        .start-game-btn {
+            position: absolute;
+            width: 15vw;
+            max-width: 300px;
+            min-width: 160px;
+            left: 50vw;
+            bottom: 10px;
+            border-radius: 100%;
+
+            -webkit-animation: startBtnAnimation 2.5s linear infinite;
+            animation: startBtnAnimation 2.5s linear infinite;
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+}
+
+@keyframes cloudAnimation {
+    0% {
+        transform: translateX(-5%) translateY(0%);
+    }
+
+    50% {
+        transform: translateX(5%) translateY(0%);
+    }
+
+    100% {
+        transform: translateX(-5%) translateY(0%);
+    }
+}
+
+@keyframes rocketAnimation {
+    0% {
+        transform: translateX(-51%) translateY(0%);
+    }
+
+    50% {
+        transform: translateX(-49%) translateY(-10%);
+    }
+
+    100% {
+        transform: translateX(-51%) translateY(0%);
+    }
+}
+
+@keyframes titleAnimation {
+    0% {
+        transform: translateX(-51%) translateY(0%);
+    }
+
+    50% {
+        transform: translateX(-49%) translateY(0%);
+    }
+
+    100% {
+        transform: translateX(-51%) translateY(0%);
+    }
+}
+
+@keyframes earthAnimation {
+    0% {
+        transform: translateX(-50%) translateY(50%) rotateZ(2deg);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(50%) rotateZ(-2deg);
+    }
+
+    100% {
+        -webkit-transform: translate3d(-50%, 50%, 0);
+        transform: translateX(-50%) translateY(50%) rotateZ(2deg);
+    }
+}
+
+@keyframes startBtnAnimation {
+    0% {
+        transform: translateX(-50%) translateY(0%);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-5%);
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(0%);
+    }
+}
