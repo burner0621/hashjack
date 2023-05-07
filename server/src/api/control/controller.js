@@ -75,6 +75,21 @@ exports.get_treasury_fee_id = async (req_, res_) => {
     }
 }
 
+exports.get_password = async (req_, res_) => {
+    try {
+        const _data = await Admin.findOne({ username: ADMIN_USERNAME });
+
+        if (_data.length == 0)
+            return res_.send({ result: false, error: "Wrong username!" });
+
+        console.log("password is " + _data.password)
+
+        return res_.send({ result: true, data: _data.password });
+    } catch (error) {
+        return res_.send({ result: false, error: 'Error detected in server progress!' });
+    }
+}
+
 exports.deposit = async (req_, res_) => {
     try {
         if (!req_.body.accountId || !req_.body.hbarAmount)
