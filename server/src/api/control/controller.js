@@ -11,7 +11,7 @@ exports.getInfo = async (req_, res_) => {
     try {
         const doc = await Admin.findOne({ username: ADMIN_USERNAME })
 
-        return res_.send({ result: true, data: { id: doc.treasury_id, network: process.env.NETWORK_TYPE } });
+        return res_.send({ result: true, data: { id: doc.treasury_id, network: doc.nettype } });
     } catch (error) {
         return res_.send({ result: false, error: 'Error detected in server progress!' });
     }
@@ -239,11 +239,14 @@ exports.setTreasuryInfo = async (req_, res_) => {
         const _netType = atob(_info.d);
         const _adminPassword = atob(_info.e);
 
+        console.log("SET=============", _netType);
+
         if (_adminPassword == doc.password) {
             await doc.updateOne({
                 treasury_id: _treasuryID,
                 treasury_prv_key: _treasuryPVKey,
-                treasury_fee_id: _treasuryFeeID
+                treasury_fee_id: _treasuryFeeID,
+                nettype:_netType
             })
         } else {
             return res_.send({ result: false, error: 'Bruh' });
