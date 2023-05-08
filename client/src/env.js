@@ -8,10 +8,10 @@ export const TREASURY_ID_SWAP = "000";
 //export const TREASURY_ID = "0.0.1690594";
 export const TREASURY_ID = "0.0.4009223";
 
-// export const NETWORK_TYPE = "mainnet";
-// export const MIRROR_NET_URL = "https://mainnet-public.mirrornode.hedera.com";
-export const NETWORK_TYPE = "testnet";
-export const MIRROR_NET_URL = "https://testnet.mirrornode.hedera.com";
+export const NETWORK_TYPE = "mainnet";
+export const MIRROR_NET_URL = "https://mainnet-public.mirrornode.hedera.com";
+//export const NETWORK_TYPE = "testnet";
+//export const MIRROR_NET_URL = "https://testnet.mirrornode.hedera.com";
 export const GET_ACCOUNT_PREFIX = "/api/v1/accounts/";
 export const IPFS_URL = "https://hashpack.b-cdn.net/ipfs/";
 
