@@ -25,8 +25,6 @@ import HashPackConnectModal from "../../components/HashPackConnectModal";
 import AboutDlg from '../../components/MainMenu/AboutDlg';
 import LeaderBoardDlg from "../../components/LeaderBoardDlg";
 import StatDlg from "../../components/StatDlg";
-import SettingDlg from "../../components/SettingDlg";
-
 import * as env from "../../env";
 
 function Home() {
@@ -38,10 +36,7 @@ function Home() {
     const [aboutDlgViewFlag, setAboutDlgViewFlag] = useState(false);
     const [leaderBoardDlgViewFlag, setLeaderBoardDlgViewFlag] = useState(false);
     const [statDlgViewFlag, setStatDlgViewFlag] = useState(false);
-    const [settingDlgViewFlag, setSettingDlgViewFlag] = useState(false);
-
     const [loadingView, setLoadingView] = useState(false);
-
     const [totalHbarAmount, setTotalHbarAmount] = useState(0);
     const [type, setType] = useState("deposit");
     const [inputAccountId, setInputAccountId] = useState("");
@@ -175,10 +170,6 @@ function Home() {
 
     const onGoToStat = async () => {
         setStatDlgViewFlag(true);
-    }
-
-    const onGoToSetting = async () => {
-        setSettingDlgViewFlag(true);
     }
 
     const changeToRealValue = (value_, decimal_) => {
@@ -353,35 +344,6 @@ function Home() {
                     onOK={() => setStatDlgViewFlag(false)}
                 />
             </Dialog>
-            <Dialog
-                open={settingDlgViewFlag}
-                fullWidth={true}
-                scroll='body'
-                maxWidth='md'
-            >
-                <SettingDlg
-                    nettype={netType}
-                    onSet={async (info_) => {
-                        setLoadingView(true);
-                        const _res = await postRequest(env.SERVER_URL + "/api/control/set", { accountId: accountIds[0], info: JSON.stringify(info_) });
-                        if (!_res) {
-                            toast.error("Something wrong with server!");
-                            setLoadingView(false);
-                            return;
-                        }
-                        if (!_res.result) {
-                            toast.error(_res.error);
-                            setLoadingView(false);
-                            return;
-                        }
-                        toast.success(_res.msg);
-                        setLoadingView(false);
-
-                        setSettingDlgViewFlag(false)
-                    }}
-                    onCancel={() => setSettingDlgViewFlag(false)}
-                />
-            </Dialog>
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={loadingView}
@@ -394,7 +356,6 @@ function Home() {
             <button id="gameexit" onClick={() => onGameExit()} hidden />
             <button id="leaderBoard" onClick={() => onGoToLeaderBoard()} hidden />
             <button id="stats" onClick={() => onGoToStat()} hidden />
-            <button id="setting" onClick={() => onGoToSetting()} hidden />
             <button id="deposit" value={0} onClick={onDeposit} hidden />
             <button id="withdraw" value={0} onClick={onWithdraw} hidden />
             <button id="dealbtn" value={0} onClick={onDeal} hidden />

@@ -18,7 +18,7 @@ export const IPFS_URL = "https://hashpack.b-cdn.net/ipfs/";
 export const COINGECKO_URL = "https://api.coingecko.com";
 
 // export const SERVER_URL = "";
-//export const SERVER_URL = "http://localhost:5005";
+// export const SERVER_URL = "http://localhost:5005";
 export const SERVER_URL = "https://backend.hederadogs.app/hashjack";
 
 // export const SERVER_URL = "https://degenland.tech:3306";

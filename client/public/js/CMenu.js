@@ -61,35 +61,13 @@ function CMenu() {
         var oSprite = s_oSpriteLibrary.getSprite('but_menu_bg');
         statsBtn = new CTextButton((CANVAS_WIDTH / 2), CANVAS_HEIGHT - 264, oSprite, TEXT_STATS, FONT_GAME_1, "#ffffff", 25, s_oStage);
         statsBtn.addEventListener(ON_MOUSE_UP, this._onGoToStats, this);
-
-        var oSprite = s_oSpriteLibrary.getSprite('but_menu_bg');
-        settingBtn = new CTextButton((CANVAS_WIDTH / 2), CANVAS_HEIGHT - 164, oSprite, TEXT_SETTING, FONT_GAME_1, "#ffffff", 25, s_oStage);
-        settingBtn.addEventListener(ON_MOUSE_UP, this._onGoToSetting, this);
-        settingBtn.setVisible(false);
-
-        if ($("#treasury").val() === "true")
-            settingBtn.setVisible(true);
-        else
-            settingBtn.setVisible(false);
-        $("#treasury").click(() => {
-            if ($("#treasury").val() === "true")
-                settingBtn.setVisible(true);
-            else
-                settingBtn.setVisible(false);
-        })
-
-
+       
         if (DISABLE_SOUND_MOBILE === false || s_bMobile === false) {
             var oSprite = s_oSpriteLibrary.getSprite('audio_icon');
             _pStartPosAudio = { x: oSprite.width / 4 + 10, y: oSprite.height * 2 - 20 };
             _oAudioToggle = new CToggle(_pStartPosAudio.x, _pStartPosAudio.y, oSprite, s_bAudioActive, s_oStage);
             _oAudioToggle.addEventListener(ON_MOUSE_UP, this._onAudioToggle, this);
         }
-
-        // var oSprite = s_oSpriteLibrary.getSprite('but_leaderboard');
-        // _pStartPosLeader = { x: CANVAS_WIDTH - (oSprite.width / 4) - 10, y: (oSprite.height / 2) + 10 };
-        // leaderboardBtn = new CToggle(_pStartPosLeader.x, _pStartPosLeader.y, oSprite, s_bAudioActive, s_oStage);
-        // leaderboardBtn.addEventListener(ON_MOUSE_UP, this._onGoToLeaderBoard, this);
 
         var oSpriteCredits = s_oSpriteLibrary.getSprite('but_credits');
 
