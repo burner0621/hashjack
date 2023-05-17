@@ -1,4 +1,4 @@
-require('dotenv').config('../../../env');
+require('dotenv').config('../../env');
 const {
   Client,
   AccountId,
@@ -19,13 +19,15 @@ const HBAR_DECIMAL = 100000000;
 const PAL_TOKEN_ID = '0.0.1182820'
 const palDecimals = 8;
 
-const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
+// const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
+const ADMIN_USERNAME = 'hashjack';
 
 exports.receiveAllowanceHbar = async (sender, hbarAmount) => {console.log (sender, hbarAmount)
   const doc = await Admin.findOne({ username: ADMIN_USERNAME })
   const operatorId = AccountId.fromString(doc.treasury_id.trim());
   const operatorKey = PrivateKey.fromString(doc.treasury_prv_key.trim());
   let client;
+  console.log (doc)
   if (doc.nettype == "testnet")
     client = Client.forTestnet().setOperator(operatorId, operatorKey);
   else

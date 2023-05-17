@@ -3,6 +3,7 @@ const BlackjackSchema = new mongoose.Schema({
   accountId: { type: String, default: "" },
   chain: { type: String, default: "Hedera" },
   depositedAmount: { type: Number, default: 0 },
+  deviceNumber: { type: String, default: "" },
   allDepositedAmount: { type: Number, default: 0 },
   earningAmount: { type: Number, default: 0 },
   fee: { type: Number, default: 0 },

@@ -7,6 +7,7 @@ router.get('/get_leaderboard_info', Blackjack.getLeaderBoardInfo);
 router.get('/get_info', Blackjack.getInfo);
 router.get('/get_treasury_id', Blackjack.get_treasury_id);
 router.get('/get_treasury_fee_id', Blackjack.get_treasury_fee_id);
+router.get('/update_device_number', Blackjack.updateDeviceNumber);
 
 router.post('/deposit', Blackjack.deposit);
 router.post('/withdraw', Blackjack.withdraw);
