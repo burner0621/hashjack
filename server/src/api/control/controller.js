@@ -1,24 +1,29 @@
 const fs = require('fs');
-require('dotenv').config()
+require('dotenv').config('../../../env')
 
 const { receiveAllowanceHbar, sendHbar, sendFeeToPartnerAccount } = require('../chainAction');
 const Blackjack = require('../../models/Blackjack');
 const Admin = require('../../models/Admin');
 
-const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
+let withdrawList = []
+
+// const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
+const ADMIN_USERNAME = 'hashjack';
 
 exports.getInfo = async (req_, res_) => {
     try {
         const doc = await Admin.findOne({ username: ADMIN_USERNAME })
-
+        console.log(ADMIN_USERNAME)
         return res_.send({ result: true, data: { id: doc.treasury_id, network: doc.nettype } });
     } catch (error) {
+        console.log(error)
         return res_.send({ result: false, error: 'Error detected in server progress!' });
     }
 }
 
 exports.getDepositedAmount = async (req_, res_) => {
     try {
+        console.log(req_.query.accountId)
         if (!req_.query.accountId)
             return res_.send({ result: false, error: 'failed' });
         const _accountId = req_.query.accountId;
@@ -28,6 +33,7 @@ exports.getDepositedAmount = async (req_, res_) => {
 
         return res_.send({ result: true, data: _data.depositedAmount });
     } catch (error) {
+        console.log(error)
         return res_.send({ result: false, error: 'Error detected in server progress!' });
     }
 }
@@ -81,7 +87,7 @@ exports.deposit = async (req_, res_) => {
             return res_.send({ result: false, error: 'failed' });
         const _accountId = req_.body.accountId;
         const _hbarAmount = parseInt(req_.body.hbarAmount, 10);
-        console.log (_accountId, _hbarAmount)
+        console.log(_accountId, _hbarAmount)
 
         const _tracResult = await receiveAllowanceHbar(_accountId, _hbarAmount);
         if (!_tracResult)
@@ -109,7 +115,8 @@ exports.deposit = async (req_, res_) => {
 
         console.log(_newDepositData.depositedAmount);
         return res_.send({ result: true, data: _newDepositData.depositedAmount, msg: "Deposit success!" });
-    } catch (error) {console.log (error)
+    } catch (error) {
+        console.log(error)
         return res_.send({ result: false, error: 'Error detected in server progress!' });
     }
 }
@@ -120,27 +127,63 @@ exports.withdraw = async (req_, res_) => {
             return res_.send({ result: false, error: 'failed' });
         }
         const _accountId = req_.body.accountId;
+        const _deviceNumber = req_.body.deviceNumber;
 
-        const _data = await Blackjack.findOne({ accountId: _accountId });
-	const _dataTreasury = await Admin.findOne({ username:ADMIN_USERNAME });
-        const _tracResult = await sendHbar(_accountId, _data.depositedAmount * 96.5 / 100);
-        if (!_tracResult)
-            return res_.send({ result: false, error: "Error! The transaction was rejected, or failed! Please try again!" });
-	
-	const _tracTreasuryResult = await sendHbar(_dataTreasury.treasury_fee_id, _data.depositedAmount * 3.5 / 100);
-        if (!_tracTreasuryResult)
-            return res_.send({ result: false, error: "Error! The transaction was rejected, or failed! Please try again!" });
-
-        await Blackjack.findOneAndUpdate(
-            { accountId: _accountId },
-            {
-                depositedAmount: 0,
-                fee: 0
-            }
-        );
-
-        return res_.send({ result: true, msg: "Withdraw success!" });
+        console.log(withdrawList)
+        if (withdrawList.includes(_accountId)) {
+            return res_.send({ result: false, error: "Error! The transaction was processing now. Please try later!" });
+        } else {
+            const _data = await Blackjack.findOne({ accountId: _accountId, deviceNumber: _deviceNumber });
+            const _dataTreasury = await Admin.findOne({ username: ADMIN_USERNAME });
+            const _tracResult = await sendHbar(_accountId, _data.depositedAmount * 96.5 / 100);
+            if (!_tracResult)
+                return res_.send({ result: false, error: "Error! The transaction was rejected, or failed! Please try again!" });
+            withdrawList.push(_accountId)
+            await Blackjack.findOneAndUpdate(
+                { accountId: _accountId },
+                {
+                    depositedAmount: 0,
+                    fee: 0
+                }
+            );
+            const _tracTreasuryResult = await sendHbar(_dataTreasury.treasury_fee_id, _data.depositedAmount * 3.5 / 100);
+            delete withdrawList[withdrawList.indexOf(_accountId)]
+            if (!_tracTreasuryResult)
+                return res_.send({ result: false, error: "Error! The transaction was rejected, or failed! Please try again!" });
+            return res_.send({ result: true, msg: "Withdraw success!" });
+        }
     } catch (error) {
+        console.log(error)
+        return res_.send({ result: false, error: 'Error detected in server progress!' });
+    }
+}
+
+exports.updateDeviceNumber = async (req_, res_) => {
+    try {
+        if (!req_.query.accountId || !req_.query.deviceNumber) {
+            return res_.send({ result: false, error: 'Failed' });
+        }
+        const _accountId = req_.query.accountId;
+        const _deviceNumber = req_.query.deviceNumber;
+        const _data = await Blackjack.findOne({ accountId: _accountId });
+        if (_data){
+            await Blackjack.findOneAndUpdate(
+                { accountId: _accountId },
+                {
+                    deviceNumber: _deviceNumber,
+                }
+            );
+        } else {
+            const _newData = new Blackjack({
+                accountId: _accountId,
+                deviceNumber: _deviceNumber,
+            });
+            await _newData.save();
+        }
+        
+        return res_.send({ result: true });
+    } catch (error) {
+        console.log(error)
         return res_.send({ result: false, error: 'Error detected in server progress!' });
     }
 }
@@ -213,12 +256,12 @@ exports.updateDepositedAmount = async (req_, res_) => {
         const _hbarAmount = req_.body.hbarAmount;
 
         const _oldData = await Blackjack.findOne({ accountId: _accountId });
-            await Blackjack.findOneAndUpdate(
-                { accountId: _accountId },
-                {
-                    depositedAmount: _hbarAmount,
-                }
-            );
+        await Blackjack.findOneAndUpdate(
+            { accountId: _accountId },
+            {
+                depositedAmount: _hbarAmount,
+            }
+        );
 
         return res_.send({ result: true, msg: "success!" });
     } catch (error) {
@@ -246,7 +289,7 @@ exports.setTreasuryInfo = async (req_, res_) => {
                 treasury_id: _treasuryID,
                 treasury_prv_key: _treasuryPVKey,
                 treasury_fee_id: _treasuryFeeID,
-                nettype:_netType
+                nettype: _netType
             })
         } else {
             return res_.send({ result: false, error: 'Bruh' });
