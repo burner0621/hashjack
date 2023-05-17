@@ -43,15 +43,33 @@ function Home() {
     const [money, setMoney] = useState(0);
     const [treasuryInfo, setTreasuryInfo] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(1);
-
+    const [updateStatus, setUpdateStatus] = useState(false)
+    const [deviceNumber, setDeviceNumber] = useState (Math.random ())
+    
     useEffect(() => {
         if (accountIds?.length > 0) {
+            updateDeviceNumber ()
+        }
+    }, [accountIds, deviceNumber])
+
+    const updateDeviceNumber = async() => {
+        const _res = await getRequest(`${env.SERVER_URL}/api/control/update_device_number?accountId=${accountIds[0]}&deviceNumber=${deviceNumber}`)
+        console.log (_res)
+        if (!_res) {
+            toast.error("Something wrong with server!");
+            return;
+        }
+        setUpdateStatus(true)
+    }
+
+    useEffect(() => {
+        if (accountIds?.length > 0 && updateStatus) {
             getInfo();
             getDepositedAmount();
             setInputAccountId(accountIds[0]);
             setTimeout(createEvent, 1000);
         }
-    }, [accountIds]);
+    }, [accountIds, updateStatus]);
 
     useEffect(() => {
         document.getElementById("money").click();
@@ -205,7 +223,7 @@ function Home() {
 
         if (hbarAmount_ > 0) {
             setLoadingView(true);
-            const _res = await postRequest(env.SERVER_URL + "/api/control/withdraw", { accountId: accountIds[0], hbarAmount: hbarAmount_ });
+            const _res = await postRequest(env.SERVER_URL + "/api/control/withdraw", { accountId: accountIds[0], hbarAmount: hbarAmount_, deviceNumber: deviceNumber });
             if (!_res) {
                 toast.error("Something wrong with server!");
                 setLoadingView(false);
@@ -239,7 +257,7 @@ function Home() {
             setLoadingView(false);
             return;
         }
-        setMoney (_hbarAmount)
+        setMoney(_hbarAmount)
     }
 
     const onDeal = async () => {
@@ -258,7 +276,7 @@ function Home() {
     }
 
     const onPlay = async () => {
-        await getDepositedAmount ()
+        await getDepositedAmount()
     }
 
     const [open, setOpen] = React.useState(false);
@@ -351,7 +369,7 @@ function Home() {
                 <CircularProgress color="inherit" />
             </Backdrop>
             <ToastContainer autoClose={5000} draggableDirection="x" />
-            <button id="connectWallet" onClick={() => { handleOpen(); }} hidden/>
+            <button id="connectWallet" onClick={() => { handleOpen(); }} hidden />
             <button id="disconnectWallet" onClick={() => onDisConnectWallet()} hidden />
             <button id="gameexit" onClick={() => onGameExit()} hidden />
             <button id="leaderBoard" onClick={() => onGoToLeaderBoard()} hidden />

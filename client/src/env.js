@@ -8,17 +8,17 @@ export const TREASURY_ID_SWAP = "000";
 //export const TREASURY_ID = "0.0.1690594";
 export const TREASURY_ID = "0.0.4009223";
 
-export const NETWORK_TYPE = "mainnet";
-export const MIRROR_NET_URL = "https://mainnet-public.mirrornode.hedera.com";
+export const NETWORK_TYPE = "testnet";
+// export const MIRROR_NET_URL = "https://mainnet-public.mirrornode.hedera.com";
 //export const NETWORK_TYPE = "testnet";
-//export const MIRROR_NET_URL = "https://testnet.mirrornode.hedera.com";
+export const MIRROR_NET_URL = "https://testnet.mirrornode.hedera.com";
 export const GET_ACCOUNT_PREFIX = "/api/v1/accounts/";
 export const IPFS_URL = "https://hashpack.b-cdn.net/ipfs/";
 
 export const COINGECKO_URL = "https://api.coingecko.com";
 
 // export const SERVER_URL = "";
-//export const SERVER_URL = "http://localhost:5005";
+// export const SERVER_URL = "http://localhost:5000";
 export const SERVER_URL = "https://backend.hederadogs.app/jack";
 
 // export const SERVER_URL = "https://degenland.tech:3306";
