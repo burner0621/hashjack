@@ -152,7 +152,9 @@ function CInterface(iMoney) {
         }
 
         _oInsurancePanel = new CInsurancePanel();
-
+        $("#judgeDealBtn").click((e) => {
+            s_oGame.onDeal();
+        })
 
         this.disableButtons();
 
@@ -311,7 +313,6 @@ function CInterface(iMoney) {
         this.disableButtons();
         $("#money").val(s_oGame.getCurrentCredit())
         $("#dealbtn").click()
-        s_oGame.onDeal();
     };
 
     this._onButHitRelease = function () {

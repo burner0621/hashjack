@@ -44,17 +44,17 @@ function Home() {
     const [treasuryInfo, setTreasuryInfo] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(1);
     const [updateStatus, setUpdateStatus] = useState(false)
-    const [deviceNumber, setDeviceNumber] = useState (Math.random ())
-    
+    const [deviceNumber, setDeviceNumber] = useState(Math.random())
+
     useEffect(() => {
         if (accountIds?.length > 0) {
-            updateDeviceNumber ()
+            updateDeviceNumber()
         }
     }, [accountIds, deviceNumber])
 
-    const updateDeviceNumber = async() => {
+    const updateDeviceNumber = async () => {
         const _res = await getRequest(`${env.SERVER_URL}/api/control/update_device_number?accountId=${accountIds[0]}&deviceNumber=${deviceNumber}`)
-        console.log (_res)
+        console.log(_res)
         if (!_res) {
             toast.error("Something wrong with server!");
             return;
@@ -246,7 +246,8 @@ function Home() {
         const _earning = document.getElementById("endRound").getAttribute("earning");
         const _roundfee = document.getElementById("endRound").getAttribute("roundfee");
 
-        const _res = await postRequest(env.SERVER_URL + "/api/control/end_round", { accountId: accountIds[0], hbarAmount: _hbarAmount, winflag: _winflag, earning: _earning, roundfee: _roundfee });
+        const _res = await postRequest(env.SERVER_URL + "/api/control/end_round", { accountId: accountIds[0], deviceNumber: deviceNumber, hbarAmount: _hbarAmount, winflag: _winflag, earning: _earning, roundfee: _roundfee });
+        console.log (_res, deviceNumber, ">>>>>>>>>>>>>>>>")
         if (!_res) {
             toast.error("Something wrong with server!");
             setLoadingView(false);
@@ -261,18 +262,25 @@ function Home() {
     }
 
     const onDeal = async () => {
-        const _hbarAmount = document.getElementById("money").value;
-        const _res = await postRequest(env.SERVER_URL + "/api/control/update", { accountId: accountIds[0], hbarAmount: _hbarAmount });
-        if (!_res) {
-            toast.error("Something wrong with server!");
-            setLoadingView(false);
-            return;
+        setLoadingView(true);
+        try {
+            const _hbarAmount = document.getElementById("money").value;
+            const _res = await postRequest(env.SERVER_URL + "/api/control/update", { accountId: accountIds[0], hbarAmount: _hbarAmount, deviceNumber: deviceNumber });
+            if (!_res) {
+                toast.error("Something wrong with server!");
+                setLoadingView(false);
+                return;
+            }
+            if (!_res.result) {
+                toast.error(_res.error);
+                setLoadingView(false);
+                return;
+            }
+            document.getElementById("judgeDealbtn").click()
+        } catch (e) {
+            console.log(e)
         }
-        if (!_res.result) {
-            toast.error(_res.error);
-            setLoadingView(false);
-            return;
-        }
+        setLoadingView(false);
     }
 
     const onPlay = async () => {
@@ -377,6 +385,7 @@ function Home() {
             <button id="deposit" value={0} onClick={onDeposit} hidden />
             <button id="withdraw" value={0} onClick={onWithdraw} hidden />
             <button id="dealbtn" value={0} onClick={onDeal} hidden />
+            <button id="judgeDealbtn" value={0} onClick={console.log('Deal!')} hidden />
             <button id="playbtn" value={0} onClick={onPlay} hidden />
             <button id="endRound" value={0} winflag={0} earning={0} roundfee={0} onClick={onEndRound} hidden />
             <input id="walletId" value={inputAccountId} onChange={(e) => setInputAccountId(e.target.value)} hidden />
