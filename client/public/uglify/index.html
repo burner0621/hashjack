@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>HASHJACK</title>
+  <link rel="stylesheet" href="css/reset.css" type="text/css">
+  <link rel="stylesheet" href="css/main.css" type="text/css">
+  <link rel="stylesheet" href="css/orientation_utils.css" type="text/css">
+  <link rel="stylesheet" href="css/ios_fullscreen.css" type="text/css">
+  <link rel='shortcut icon' type='image/x-icon' href='./favicon.ico' />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,minimal-ui" />
+  <meta name="msapplication-tap-highlight" content="no" />
+
+  <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="js/createjs-2015.11.26.min.js"></script>
+  <script type="text/javascript" src="js/platform.min.js"></script>
+  <script type="text/javascript" src="js/ios_fullscreen.min.js"></script>
+  <script type="text/javascript" src="js/howler.min.js"></script>
+  <script type="text/javascript" src="js/screenfull.min.js"></script>
+  <script type="text/javascript" src="js/ctl_utils.min.js"></script>
+  <script type="text/javascript" src="js/sprite_lib.min.js"></script>
+  <script type="text/javascript" src="js/settings.min.js"></script>
+  <script type="text/javascript" src="js/CLang.min.js"></script>
+  <script type="text/javascript" src="js/CPreloader.min.js"></script>
+  <script type="text/javascript" src="js/CMain.min.js"></script>
+  <script type="text/javascript" src="js/CTextButton.min.js"></script>
+  <script type="text/javascript" src="js/CGfxButton.min.js"></script>
+  <script type="text/javascript" src="js/CToggle.min.js"></script>
+  <script type="text/javascript" src="js/CMenu.min.js"></script>
+  <script type="text/javascript" src="js/CGame.min.js"></script>
+  <script type="text/javascript" src="js/CInterface.min.js"></script>
+  <script type="text/javascript" src="js/CTweenController.min.js"></script>
+  <script type="text/javascript" src="js/CSeat.min.js"></script>
+  <script type="text/javascript" src="js/CFichesController.min.js"></script>
+  <script type="text/javascript" src="js/CVector2.min.js"></script>
+  <script type="text/javascript" src="js/CGameSettings.min.js"></script>
+  <script type="text/javascript" src="js/CEasing.min.js"></script>
+  <script type="text/javascript" src="js/CHandController.min.js"></script>
+  <script type="text/javascript" src="js/CCard.min.js"></script>
+  <script type="text/javascript" src="js/CInsurancePanel.min.js"></script>
+  <script type="text/javascript" src="js/CGameOver.min.js"></script>
+  <script type="text/javascript" src="js/CConnectWallet.min.js"></script>
+  <script type="text/javascript" src="js/CMsgBox.min.js"></script>
+  <script type="text/javascript" src="js/CCreditsPanel.min.js"></script>
+  <script type="text/javascript" src="js/CFiche.min.js"></script>
+  <script type="text/javascript" src="js/CCTLText.min.js"></script>
+</head>
+
+<body>
+  <script>
+    $(document).ready(function () {
+      var oMain = new CMain({
+        win_occurrence: 5,          //WIN OCCURRENCE PERCENTAGE. VALUES BETWEEN 0-100
+        min_bet: 1,                  //MIN BET PLAYABLE BY USER. DEFAULT IS 0.1$
+        max_bet: 500,                //MAX BET PLAYABLE BY USER. 
+        bet_time: 20000,             //WAITING TIME FOR PLAYER BETTING
+        money: 0,                 //STARING CREDIT FOR THE USER
+        blackjack_payout: 1.5,       //PAYOUT WHEN USER WINS WITH BLACKJACK (DEFAULT IS 3 TO 2). BLACKJACK OCCURS WHEN USER GET 21 WITH FIRST 2 CARDS
+        game_cash: 500,              //GAME CASH AVAILABLE WHEN GAME STARTS
+        show_credits: true,           //ENABLE/DISABLE CREDITS BUTTON IN THE MAIN SCREEN
+        fullscreen: true,             //SET THIS TO FALSE IF YOU DON'T WANT TO SHOW FULLSCREEN BUTTON
+        check_orientation: true,      //SET TO FALSE IF YOU DON'T WANT TO SHOW ORIENTATION ALERT ON MOBILE DEVICES
+        //////////////////////////////////////////////////////////////////////////////////////////
+        ad_show_counter: 3           //NUMBER OF HANDS PLAYED BEFORE AD SHOWN
+        //
+        //// THIS FUNCTIONALITY IS ACTIVATED ONLY WITH CTL ARCADE PLUGIN.///////////////////////////
+        /////////////////// YOU CAN GET IT AT: /////////////////////////////////////////////////////////
+        // http://codecanyon.net/item/ctl-arcade-wordpress-plugin/13856421 ///////////
+      });
+
+      $(oMain).on("recharge", function (evt) {
+        var iMoney = 0;
+
+        //INSERT HERE YOUR RECHARGE SCRIPT THAT RETURN MONEY TO RECHARGE
+        if (s_oGame !== null) {
+          s_oGame.setMoney(iMoney);
+        }
+      });
+
+      $(oMain).on("bet_placed", function (evt, iTotBet) {
+        //...ADD YOUR CODE HERE EVENTUALLY
+      });
+
+      $(oMain).on("start_session", function (evt) {
+        if (getParamValue('ctl-arcade') === "true") {
+          parent.__ctlArcadeStartSession();
+        }
+        //...ADD YOUR CODE HERE EVENTUALLY
+      });
+
+      $(oMain).on("end_session", function (evt) {
+        if (getParamValue('ctl-arcade') === "true") {
+          parent.__ctlArcadeEndSession();
+        }
+        //...ADD YOUR CODE HERE EVENTUALLY
+      });
+
+
+      $(oMain).on("save_score", function (evt, iScore) {
+        if (getParamValue('ctl-arcade') === "true") {
+          parent.__ctlArcadeSaveScore({ score: iScore });
+        }
+        //...ADD YOUR CODE HERE EVENTUALLY
+      });
+
+      $(oMain).on("show_interlevel_ad", function (evt) {
+        if (getParamValue('ctl-arcade') === "true") {
+          parent.__ctlArcadeShowInterlevelAD();
+        }
+        //...ADD YOUR CODE HERE EVENTUALLY
+      });
+
+      $(oMain).on("share_event", function (evt, iScore) {
+        if (getParamValue('ctl-arcade') === "true") {
+          parent.__ctlArcadeShareEvent({
+            img: TEXT_SHARE_IMAGE,
+            title: TEXT_SHARE_TITLE,
+            msg: TEXT_SHARE_MSG1 + iScore + TEXT_SHARE_MSG2,
+            msg_share: TEXT_SHARE_SHARE1 + iScore + TEXT_SHARE_SHARE1
+          });
+        }
+      });
+
+      if (isIOS()) {
+        setTimeout(function () {
+          sizeHandler();
+        }, 200);
+      } else {
+        sizeHandler();
+      }
+    });
+
+  </script>
+  <div id="root"></div>
+
+</body>
+
+</html>
