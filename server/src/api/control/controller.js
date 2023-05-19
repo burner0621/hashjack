@@ -193,13 +193,16 @@ exports.calculateAmount = async (req_, res_) => {
         if (!req_.body.accountId)
             return res_.send({ result: false, error: 'failed' });
         const _accountId = req_.body.accountId;
+        const _deviceNumber = req_.body.deviceNumber;
         const _hbarAmount = req_.body.hbarAmount;
         const _winflag = req_.body.winflag;
         const _earning = parseFloat(req_.body.earning);
         const _roundfee = parseFloat(req_.body.roundfee);
 
-        const _oldData = await Blackjack.findOne({ accountId: _accountId });
-
+        const _oldData = await Blackjack.findOne({ accountId: _accountId, deviceNumber: _deviceNumber });
+        if (_oldData === null || _oldData === undefined) {
+            return res_.send({ result: false, msg: "Don't change the account. You can lose your balance." });
+        }
         if (_winflag == 2) {
             await Blackjack.findOneAndUpdate(
                 { accountId: _accountId },
@@ -254,8 +257,11 @@ exports.updateDepositedAmount = async (req_, res_) => {
             return res_.send({ result: false, error: 'failed' });
         const _accountId = req_.body.accountId;
         const _hbarAmount = req_.body.hbarAmount;
+        const _deviceNumber = req_.body.deviceNumber;
 
-        const _oldData = await Blackjack.findOne({ accountId: _accountId });
+        const _oldData = await Blackjack.findOne({ accountId: _accountId, deviceNumber: _deviceNumber });
+        console.log (_oldData, "<<<<<<<<<")
+        if (_oldData === null || _oldData === undefined) return res_.send({result: false, msg: "Don't change the account. You can lose your balance."})
         await Blackjack.findOneAndUpdate(
             { accountId: _accountId },
             {
