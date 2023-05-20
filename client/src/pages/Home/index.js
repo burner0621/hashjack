@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import "./style.scss";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -47,6 +46,26 @@ function Home() {
     const [deviceNumber, setDeviceNumber] = useState(Math.random())
 
     useEffect(() => {
+        const localStore = localStorage.setItem;
+
+        localStorage.setItem = function (key, value) {
+            const event = new Event('localUpdated');
+            event.key = key;
+            event.value = value;
+
+            document.dispatchEvent(event);
+            localStore.apply(this, arguments);
+        };
+
+        const localStoreHandler = function (e) {
+            document.getElementById("money").value = e.value
+            document.getElementById("judgeDealbtn").click()
+        };
+
+        document.addEventListener("localUpdated", localStoreHandler, false);
+    }, [])
+
+    useEffect(() => {
         if (accountIds?.length > 0) {
             updateDeviceNumber()
         }
@@ -54,7 +73,6 @@ function Home() {
 
     const updateDeviceNumber = async () => {
         const _res = await getRequest(`${env.SERVER_URL}/api/control/update_device_number?accountId=${accountIds[0]}&deviceNumber=${deviceNumber}`)
-        console.log(_res)
         if (!_res) {
             toast.error("Something wrong with server!");
             return;
@@ -117,6 +135,7 @@ function Home() {
             setLoadingView(false);
             return;
         }
+        localStorage.setItem("money", _res.data.toFixed(3))
         setMoney(_res.data.toFixed(3));
         setLoadingView(false);
     }
@@ -247,7 +266,6 @@ function Home() {
         const _roundfee = document.getElementById("endRound").getAttribute("roundfee");
 
         const _res = await postRequest(env.SERVER_URL + "/api/control/end_round", { accountId: accountIds[0], deviceNumber: deviceNumber, hbarAmount: _hbarAmount, winflag: _winflag, earning: _earning, roundfee: _roundfee });
-        console.log (_res, deviceNumber, ">>>>>>>>>>>>>>>>")
         if (!_res) {
             toast.error("Something wrong with server!");
             setLoadingView(false);
@@ -258,6 +276,7 @@ function Home() {
             setLoadingView(false);
             return;
         }
+        localStorage.setItem ("money", _hbarAmount)
         setMoney(_hbarAmount)
     }
 
@@ -271,12 +290,13 @@ function Home() {
                 setLoadingView(false);
                 return;
             }
-            if (!_res.result) {
+            if (_res.result === false) {
                 toast.error(_res.error);
                 setLoadingView(false);
                 return;
             }
-            document.getElementById("judgeDealbtn").click()
+            // document.getElementById("judgeDealbtn").click()
+            localStorage.setItem ("money", _hbarAmount)
         } catch (e) {
             console.log(e)
         }
