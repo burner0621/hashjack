@@ -201,7 +201,7 @@ exports.calculateAmount = async (req_, res_) => {
 
         const _oldData = await Blackjack.findOne({ accountId: _accountId, deviceNumber: _deviceNumber });
         if (_oldData === null || _oldData === undefined) {
-            return res_.send({ result: false, msg: "Don't change the account. You can lose your balance." });
+            return res_.send({ result: false, error: "Don't change the account. You can lose your balance. This bet is ignored" });
         }
         if (_winflag == 2) {
             await Blackjack.findOneAndUpdate(
@@ -261,7 +261,7 @@ exports.updateDepositedAmount = async (req_, res_) => {
 
         const _oldData = await Blackjack.findOne({ accountId: _accountId, deviceNumber: _deviceNumber });
         console.log (_oldData, "<<<<<<<<<")
-        if (_oldData === null || _oldData === undefined) return res_.send({result: false, msg: "Don't change the account. You can lose your balance."})
+        if (_oldData === null || _oldData === undefined) return res_.send({result: false, error: "Don't change the account. You can lose your balance."})
         await Blackjack.findOneAndUpdate(
             { accountId: _accountId },
             {
