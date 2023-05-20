@@ -113,7 +113,6 @@ function CGame(oData) {
         _bUpdate = true;
 
         window.addEventListener('focus', function () {
-            console.log(localStorage.getItem("money"), "<<<<<<<<<<<<<<<")
             _oInterface.refreshCredit(localStorage.getItem("money"));
             _oSeat.setCredit(localStorage.getItem("money"));
 
@@ -127,7 +126,7 @@ function CGame(oData) {
             _oInterface.refreshCredit(document.getElementById("money").value);
             _oSeat.setCredit(document.getElementById("money").value);
             
-            _oSeat.setVisibleSitDownButton(false);
+            // _oSeat.setVisibleSitDownButton(false);
             _oSeat.setCredit(Number(document.getElementById("money").value));
             _oInterface.refreshCredit(document.getElementById("money").value);
         });

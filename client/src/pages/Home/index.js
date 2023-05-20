@@ -253,6 +253,7 @@ function Home() {
                 setLoadingView(false);
                 return;
             }
+            localStorage.setItem("money", 0)
             toast.success(_res.msg);
             setMoney(0);
             setLoadingView(false);
@@ -362,7 +363,8 @@ function Home() {
                             return;
                         }
                         toast.success(_res.msg);
-                        setMoney(parseInt(_res.data, 10));
+                        localStorage.setItem ("money", _res.data)
+                        setMoney(parseFloat(_res.data));
                         setLoadingView(false);
                     }}
                     onCancel={() => {
