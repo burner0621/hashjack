@@ -116,16 +116,13 @@ function CGame(oData) {
             _oInterface.refreshCredit(localStorage.getItem("money"));
             _oSeat.setCredit(localStorage.getItem("money"));
 
-            _oSeat.setVisibleSitDownButton(false);
+            // _oSeat.setVisibleSitDownButton(false);
             _oSeat.setCredit(Number(localStorage.getItem("money")));
             _oInterface.refreshCredit(localStorage.getItem("money"));
 
         });
 
         $("#judgeDealbtn").click((e) => {
-            _oInterface.refreshCredit(document.getElementById("money").value);
-            _oSeat.setCredit(document.getElementById("money").value);
-            
             // _oSeat.setVisibleSitDownButton(false);
             _oSeat.setCredit(Number(document.getElementById("money").value));
             _oInterface.refreshCredit(document.getElementById("money").value);
