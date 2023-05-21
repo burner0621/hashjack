@@ -129,13 +129,13 @@ exports.withdraw = async (req_, res_) => {
         const _accountId = req_.body.accountId;
         const _deviceNumber = req_.body.deviceNumber;
 
-        console.log(withdrawList)
         if (withdrawList.includes(_accountId)) {
             return res_.send({ result: false, error: "Error! The transaction was processing now. Please try later!" });
         } else {
             const _data = await Blackjack.findOne({ accountId: _accountId, deviceNumber: _deviceNumber });
             const _dataTreasury = await Admin.findOne({ username: ADMIN_USERNAME });
-            const _tracResult = await sendHbar(_accountId, _data.depositedAmount * 96.5 / 100);
+            const depositingAmount = (parseInt(_data.depositedAmount) * 96.5 / 100).toFixed(3)
+            const _tracResult = await sendHbar(_accountId, depositingAmount);
             if (!_tracResult)
                 return res_.send({ result: false, error: "Error! The transaction was rejected, or failed! Please try again!" });
             withdrawList.push(_accountId)
@@ -146,7 +146,7 @@ exports.withdraw = async (req_, res_) => {
                     fee: 0
                 }
             );
-            const _tracTreasuryResult = await sendHbar(_dataTreasury.treasury_fee_id, _data.depositedAmount * 3.5 / 100);
+            const _tracTreasuryResult = await sendHbar(_dataTreasury.treasury_fee_id, (parseFloat(_data.depositedAmount) - depositingAmount).toFixed(3));
             delete withdrawList[withdrawList.indexOf(_accountId)]
             if (!_tracTreasuryResult)
                 return res_.send({ result: false, error: "Error! The transaction was rejected, or failed! Please try again!" });
@@ -166,7 +166,7 @@ exports.updateDeviceNumber = async (req_, res_) => {
         const _accountId = req_.query.accountId;
         const _deviceNumber = req_.query.deviceNumber;
         const _data = await Blackjack.findOne({ accountId: _accountId });
-        if (_data){
+        if (_data) {
             await Blackjack.findOneAndUpdate(
                 { accountId: _accountId },
                 {
@@ -180,7 +180,7 @@ exports.updateDeviceNumber = async (req_, res_) => {
             });
             await _newData.save();
         }
-        
+
         return res_.send({ result: true });
     } catch (error) {
         console.log(error)
@@ -260,8 +260,8 @@ exports.updateDepositedAmount = async (req_, res_) => {
         const _deviceNumber = req_.body.deviceNumber;
 
         const _oldData = await Blackjack.findOne({ accountId: _accountId, deviceNumber: _deviceNumber });
-        console.log (_oldData, "<<<<<<<<<")
-        if (_oldData === null || _oldData === undefined) return res_.send({result: false, error: "Don't change the account. You can lose your balance."})
+        console.log(_oldData, "<<<<<<<<<")
+        if (_oldData === null || _oldData === undefined) return res_.send({ result: false, error: "Don't change the account. You can lose your balance." })
         await Blackjack.findOneAndUpdate(
             { accountId: _accountId },
             {
