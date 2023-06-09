@@ -17,7 +17,7 @@ exports.getInfo = async (req_, res_) => {
         return res_.send({ result: true, data: { id: doc.treasury_id, network: doc.nettype } });
     } catch (error) {
         console.log(error)
-        return res_.send({ result: false, error: 'Error detected in server progress!' });
+        return res_.send({ result: false, error: 'Error detected in server progress!1' });
     }
 }
 
@@ -34,7 +34,7 @@ exports.getDepositedAmount = async (req_, res_) => {
         return res_.send({ result: true, data: _data.depositedAmount });
     } catch (error) {
         console.log(error)
-        return res_.send({ result: false, error: 'Error detected in server progress!' });
+        return res_.send({ result: false, error: 'Error detected in server progress!2' });
     }
 }
 
@@ -47,7 +47,7 @@ exports.getLeaderBoardInfo = async (req_, res_) => {
 
         return res_.send({ result: true, data: _data });
     } catch (error) {
-        return res_.send({ result: false, error: 'Error detected in server progress!' });
+        return res_.send({ result: false, error: 'Error detected in server progress!3' });
     }
 }
 
@@ -62,7 +62,7 @@ exports.get_treasury_id = async (req_, res_) => {
 
         return res_.send({ result: true, data: _data.treasury_id });
     } catch (error) {
-        return res_.send({ result: false, error: 'Error detected in server progress!' });
+        return res_.send({ result: false, error: 'Error detected in server progress!4' });
     }
 }
 
@@ -77,7 +77,7 @@ exports.get_treasury_fee_id = async (req_, res_) => {
 
         return res_.send({ result: true, data: _data.treasury_fee_id });
     } catch (error) {
-        return res_.send({ result: false, error: 'Error detected in server progress!' });
+        return res_.send({ result: false, error: 'Error detected in server progress!5' });
     }
 }
 
@@ -117,7 +117,7 @@ exports.deposit = async (req_, res_) => {
         return res_.send({ result: true, data: _newDepositData.depositedAmount, msg: "Deposit success!" });
     } catch (error) {
         console.log(error)
-        return res_.send({ result: false, error: 'Error detected in server progress!' });
+        return res_.send({ result: false, error: 'Error detected in server progress!6' });
     }
 }
 
@@ -154,7 +154,7 @@ exports.withdraw = async (req_, res_) => {
         }
     } catch (error) {
         console.log(error)
-        return res_.send({ result: false, error: 'Error detected in server progress!' });
+        return res_.send({ result: false, error: 'Error detected in server progress!7' });
     }
 }
 
@@ -184,7 +184,7 @@ exports.updateDeviceNumber = async (req_, res_) => {
         return res_.send({ result: true });
     } catch (error) {
         console.log(error)
-        return res_.send({ result: false, error: 'Error detected in server progress!' });
+        return res_.send({ result: false, error: 'Error detected in server progress!8' });
     }
 }
 
@@ -247,7 +247,7 @@ exports.calculateAmount = async (req_, res_) => {
 
         return res_.send({ result: true, msg: "success!" });
     } catch (error) {
-        return res_.send({ result: false, error: 'Error detected in server progress!' });
+        return res_.send({ result: false, error: 'Error detected in server progress!9' });
     }
 }
 
@@ -271,7 +271,7 @@ exports.updateDepositedAmount = async (req_, res_) => {
 
         return res_.send({ result: true, msg: "success!" });
     } catch (error) {
-        return res_.send({ result: false, error: 'Error detected in server progress!' });
+        return res_.send({ result: false, error: 'Error detected in server progress!10' });
     }
 }
 
@@ -303,7 +303,7 @@ exports.setTreasuryInfo = async (req_, res_) => {
 
         return res_.send({ result: true, msg: "Success!" });
     } catch (error) {
-        return res_.send({ result: false, error: 'Error detected in server progress!' });
+        return res_.send({ result: false, error: 'Error detected in server progress!11' });
     }
 }
 /*
