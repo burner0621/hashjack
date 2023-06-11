@@ -4,6 +4,7 @@ require('dotenv').config('../../../env')
 const { receiveAllowanceHbar, sendHbar, sendFeeToPartnerAccount } = require('../chainAction');
 const Blackjack = require('../../models/Blackjack');
 const Admin = require('../../models/Admin');
+const myMap = new Map();
 
 let withdrawList = []
 
@@ -17,7 +18,7 @@ exports.getInfo = async (req_, res_) => {
         return res_.send({ result: true, data: { id: doc.treasury_id, network: doc.nettype } });
     } catch (error) {
         console.log(error)
-        return res_.send({ result: false, error: 'Error detected in server progress!1' });
+        return res_.send({ result: false, error: 'Error detected in server progress!' });
     }
 }
 
@@ -34,7 +35,7 @@ exports.getDepositedAmount = async (req_, res_) => {
         return res_.send({ result: true, data: _data.depositedAmount });
     } catch (error) {
         console.log(error)
-        return res_.send({ result: false, error: 'Error detected in server progress!2' });
+        return res_.send({ result: false, error: 'Error detected in server progress!' });
     }
 }
 
@@ -47,7 +48,7 @@ exports.getLeaderBoardInfo = async (req_, res_) => {
 
         return res_.send({ result: true, data: _data });
     } catch (error) {
-        return res_.send({ result: false, error: 'Error detected in server progress!3' });
+        return res_.send({ result: false, error: 'Error detected in server progress!' });
     }
 }
 
@@ -62,7 +63,7 @@ exports.get_treasury_id = async (req_, res_) => {
 
         return res_.send({ result: true, data: _data.treasury_id });
     } catch (error) {
-        return res_.send({ result: false, error: 'Error detected in server progress!4' });
+        return res_.send({ result: false, error: 'Error detected in server progress!' });
     }
 }
 
@@ -77,7 +78,7 @@ exports.get_treasury_fee_id = async (req_, res_) => {
 
         return res_.send({ result: true, data: _data.treasury_fee_id });
     } catch (error) {
-        return res_.send({ result: false, error: 'Error detected in server progress!5' });
+        return res_.send({ result: false, error: 'Error detected in server progress!' });
     }
 }
 
@@ -117,7 +118,7 @@ exports.deposit = async (req_, res_) => {
         return res_.send({ result: true, data: _newDepositData.depositedAmount, msg: "Deposit success!" });
     } catch (error) {
         console.log(error)
-        return res_.send({ result: false, error: 'Error detected in server progress!6' });
+        return res_.send({ result: false, error: 'Error detected in server progress!' });
     }
 }
 
@@ -154,7 +155,7 @@ exports.withdraw = async (req_, res_) => {
         }
     } catch (error) {
         console.log(error)
-        return res_.send({ result: false, error: 'Error detected in server progress!7' });
+        return res_.send({ result: false, error: 'Error detected in server progress!' });
     }
 }
 
@@ -184,7 +185,7 @@ exports.updateDeviceNumber = async (req_, res_) => {
         return res_.send({ result: true });
     } catch (error) {
         console.log(error)
-        return res_.send({ result: false, error: 'Error detected in server progress!8' });
+        return res_.send({ result: false, error: 'Error detected in server progress!' });
     }
 }
 
@@ -247,7 +248,7 @@ exports.calculateAmount = async (req_, res_) => {
 
         return res_.send({ result: true, msg: "success!" });
     } catch (error) {
-        return res_.send({ result: false, error: 'Error detected in server progress!9' });
+        return res_.send({ result: false, error: 'Error detected in server progress!' });
     }
 }
 
@@ -271,7 +272,7 @@ exports.updateDepositedAmount = async (req_, res_) => {
 
         return res_.send({ result: true, msg: "success!" });
     } catch (error) {
-        return res_.send({ result: false, error: 'Error detected in server progress!10' });
+        return res_.send({ result: false, error: 'Error detected in server progress!' });
     }
 }
 
@@ -303,7 +304,50 @@ exports.setTreasuryInfo = async (req_, res_) => {
 
         return res_.send({ result: true, msg: "Success!" });
     } catch (error) {
-        return res_.send({ result: false, error: 'Error detected in server progress!11' });
+        return res_.send({ result: false, error: 'Error detected in server progress!' });
+    }
+}
+
+exports.sitDown = async (req_, res_) => {
+    try {
+        const _accountId = req_.body.accountId;
+        if(!myMap.has(_accountId))
+        {
+            myMap.set(_accountId, 1);
+        }
+        else
+        {
+            if(myMap.get(_accountId) == 1)
+            {
+                return res_.send({ result: false, error: 'You already running this game.' });
+            }
+            else
+            {
+                myMap.set(_accountId, 1);
+            }
+        }
+        return res_.send({ result: true, msg: "Success!" });
+    } catch (error) {
+        myMap.set(_accountId, 0);
+        return res_.send({ result: false, error: 'Error detected in server progress!' });
+    }
+}
+
+exports.exitBtn = async (req_, res_) => {
+    try {
+        const _accountId = req_.body.accountId;
+        if(!myMap.has(_accountId))
+        {
+            myMap.set(_accountId, 0);
+        }
+        else
+        {
+            myMap.set(_accountId, 0);
+        }
+        return res_.send({ result: true, msg: "Success!" });
+    } catch (error) {
+        myMap.set(_accountId, 0);
+        return res_.send({ result: false, error: 'Error detected in server progress!' });
     }
 }
 /*
@@ -311,5 +355,4 @@ NETWORK_TYPE=testnet
 TREASURY_ID=0.0.3974941
 TREASURY_PVKEY=302e020100300506032b657004220420cd5788f163f963f6e1915f860888c9da5635fea86212ddefbf01a5315cbb5b47
 TREASURY_FEE_ID=0.0.3996172
-
 */

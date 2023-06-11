@@ -14,5 +14,7 @@ router.post('/withdraw', Blackjack.withdraw);
 router.post('/end_round', Blackjack.calculateAmount);
 router.post('/update', Blackjack.updateDepositedAmount);
 router.post('/set', Blackjack.setTreasuryInfo);
+router.post('/sitDown', Blackjack.sitDown);
+router.post('/exitBtn', Blackjack.exitBtn);
 
 module.exports = router;
