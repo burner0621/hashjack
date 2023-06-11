@@ -137,10 +137,36 @@ function CMenu() {
         if (accountId == '')
             _oGameOverPanel.show();
         else {
-            this.unload();
-            s_oMain.gotoGame();
-
-            $(s_oMain).trigger("start_session");
+            const _walletId = $("#walletId").val();
+            console.log("Wallet Id ============", _walletId);
+            const url = 'http://localhost:5555/api/control/sitDown';
+            const data = {
+                accountId: _walletId
+            };
+    
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(!data.result)
+                {
+                    console.log(data.error);
+                }
+                else
+                {
+                    this.unload();
+                    s_oMain.gotoGame();
+                    $(s_oMain).trigger("start_session");
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         }
     };
 
