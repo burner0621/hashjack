@@ -334,6 +334,7 @@ exports.sitDown = async (req_, res_) => {
 }
 
 exports.exitBtn = async (req_, res_) => {
+    console.log("asdfasdf");
     try {
         const _accountId = req_.body.accountId;
         if(!myMap.has(_accountId))
@@ -350,6 +351,7 @@ exports.exitBtn = async (req_, res_) => {
         return res_.send({ result: false, error: 'Error detected in server progress!' });
     }
 }
+
 /*
 NETWORK_TYPE=testnet
 TREASURY_ID=0.0.3974941
