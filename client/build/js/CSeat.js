@@ -457,6 +457,7 @@ function CSeat() {
     this._onSitDown = function () {
         if (_iCredit == 0)
             _oGameOverPanel.show();
+
         else {
             _oSitDownBut.setVisible(false);
             if(_aCbCompleted[SIT_DOWN]){
