@@ -305,7 +305,7 @@ function Home() {
     }
 
     const onPlay = async () => {
-        await getDepositedAmount()
+        toast.error("You are already running the game.");
     }
 
     const [open, setOpen] = React.useState(false);

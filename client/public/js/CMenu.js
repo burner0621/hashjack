@@ -137,6 +137,7 @@ function CMenu() {
         if (accountId == '')
             _oGameOverPanel.show();
         else {
+            
             const _walletId = $("#walletId").val();
             console.log("Wallet Id ============", _walletId);
             const url = 'http://localhost:5555/api/control/sitDown';
@@ -156,6 +157,7 @@ function CMenu() {
                 if(!data.result)
                 {
                     console.log(data.error);
+                    document.getElementById ("playbtn").click ();
                 }
                 else
                 {
