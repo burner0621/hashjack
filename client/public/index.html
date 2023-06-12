@@ -85,6 +85,14 @@
 
 <body>
   <script>
+    document.addEventListener("keydown", function(event) {
+      // Check if the key pressed was F5
+      if (event.keyCode === 116) {
+        // Prevent the default behavior of refreshing the page
+        event.preventDefault();
+      }
+    });
+
     $(document).ready(function () {
       var oMain = new CMain({
         win_occurrence: 40,          //WIN OCCURRENCE PERCENTAGE. VALUES BETWEEN 0-100
