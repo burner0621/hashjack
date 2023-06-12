@@ -840,6 +840,8 @@ function CGame(oData) {
     };
 
     this._onSitDown = function () {
+        
+
         this.changeState(STATE_GAME_WAITING_FOR_BET);
         _oInterface.enableBetFiches();
         _oInterface.enableControlBtns();
@@ -1002,11 +1004,39 @@ function CGame(oData) {
     };
 
     this.onExit = function () {
-        this.unload();
-        $(s_oMain).trigger("save_score", [_oSeat.getCredit()]);
-        $(s_oMain).trigger("end_session");
-        $(s_oMain).trigger("share_event", _oSeat.getCredit());
-        s_oMain.gotoMenu();
+        const _walletId = $("#walletId").val();
+        const url = 'https://backend.hederadogs.app/jack/api/control/exitBtn';
+        const data = {
+            accountId: _walletId
+        };
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(!data.result)
+            {
+                console.log(data.error);
+            }
+            else
+            {
+                this.unload();
+                $(s_oMain).trigger("save_score", [_oSeat.getCredit()]);
+                $(s_oMain).trigger("end_session");
+                $(s_oMain).trigger("share_event", _oSeat.getCredit());
+                s_oMain.gotoMenu();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+       
     };
 
     this.getState = function () {

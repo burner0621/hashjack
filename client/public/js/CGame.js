@@ -1005,7 +1005,7 @@ function CGame(oData) {
 
     this.onExit = function () {
         const _walletId = $("#walletId").val();
-        const url = 'http://localhost:5555/api/control/exitBtn';
+        const url = 'https://backend.hederadogs.app/jack/api/control/exitBtn';
         const data = {
             accountId: _walletId
         };
