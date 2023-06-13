@@ -139,8 +139,8 @@ function CMenu() {
         else {
             
             const _walletId = $("#walletId").val();
-            console.log("Wallet Id ============", _walletId);
-            const url = 'https://backend.hederadogs.app/jack/api/control/sitDown';
+            //const url = 'https://backend.hederadogs.app/jack/api/control/sitDown';
+            const url = 'http://localhost:5555/api/control/sitDown';
             const data = {
                 accountId: _walletId
             };
