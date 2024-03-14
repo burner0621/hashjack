@@ -1,0 +1,20 @@
+.clear-filter[filter-color="blue"] {
+  // @include linear-gradient(rgba($black-color,.20), rgba(3, 161, 224, 0.6));
+  // @include linear-gradient(#53baf4, #53baf4);
+}
+
+[data-background-color="blue"] {
+  // background-color: $info-color;
+  background-color: #53baf4;
+}
+
+.section-nucleo-icons .icons-container i:nth-child(6) {
+  color: $info-color;
+}
+
+.page-header {
+  &.page-header-small {
+    min-height: 50vw;
+    max-height: 100vh;
+  }
+}

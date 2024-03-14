@@ -1,0 +1,519 @@
+.carousel .slider-wrapper {
+    max-width: 300px;
+}
+
+.css-187mznn-MuiSlider-root {
+    color: #351d35 !important;
+}
+
+/* @media only screen and (min-width: 768px) {} */
+
+.penguin-nft-card {
+    display: flex;
+    justify-content: center;
+    min-width: 190px;
+    aspect-ratio: 1;
+}
+
+.penguin-nft-card .nft-card-wrapper {
+    position: relative;
+    padding: 0;
+    border-radius: 0;
+    border: 1px solid #f75cae;
+    overflow: hidden;
+    height: fit-content;
+}
+
+.penguin-nft-card .nft-card-wrapper:hover {
+    border: 3px solid #f75cae;
+}
+
+.penguin-nft-card .nft-card-wrapper .nft-id {
+    position: absolute;
+    top: 0;
+    left: auto;
+    right: 0;
+    background-color: #f75cae;
+    color: white;
+    padding: 5px 5px 5px 10px;
+    border-bottom-left-radius: 18px;
+    box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 50%);
+}
+
+.penguin-nft-card .nft-card-wrapper .stake-index {
+    transform: rotate(-45deg);
+    background-color: #f75cae;
+    color: white;
+    text-align: center;
+    width: 120px;
+    padding: 3px;
+    position: absolute;
+    top: 2px;
+    left: -43px;
+    box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 50%);
+}
+
+.penguin-nft-card .nft-card-wrapper .rarity-rank {
+    transform: rotate(-45deg);
+    background-color: #1762b8;
+    color: white;
+    text-align: center;
+    width: 120px;
+    padding: 3px;
+    position: absolute;
+    right: -40px;
+    bottom: 5px;
+    box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 50%);
+}
+
+.penguin-nft-card .nft-card-wrapper .stake-btn-wrapper {
+    position: absolute;
+    top: auto;
+    bottom: 10px;
+    width: 100%;
+}
+
+.stake-btn-wrapper .stake-checkbox {
+    position: absolute;
+    top: 20px;
+    left: 9px;
+}
+
+.stake-btn-wrapper .stake-checkbox input {
+    opacity: 1;
+}
+
+.stake-btn-wrapper .btn {
+    border-radius: 32px;
+    width: 50%;
+    background-color: #f75cae;
+    border: 2px solid #f75cae;
+    margin: 0 auto;
+    color: white;
+    box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 50%);
+}
+
+.stake-btn-wrapper .btn:hover {
+    background-color: transparent;
+    border: 2px solid #f75cae;
+    color: #f75cae;
+    font-weight: 700;
+}
+
+.nav-item-selected {
+    background-color: rgba(53, 29, 53, 1);
+    border-radius: 32px !important;
+    font-weight: 700;
+    color: white !important;
+}
+
+.nav-item-selected p {
+    color: white;
+}
+
+.stake-section {
+    background-color: #ffd4ff;
+    display: flex;
+}
+
+.stake-section .stake-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stake-wrapper button:focus {
+    outline: 0;
+}
+
+.stake-wrapper .stake-tabs {
+    background-color: #ffbedd;
+    width: 100%;
+}
+
+.stake-wrapper .stake-tabs .nft-view-left-header {
+    display: block;
+    width: fit-content;
+    float: left;
+    margin: 10px 0px;
+    overflow: hidden;
+}
+
+.stake-wrapper .stake-tabs .nft-view-left-header .MuiFormControlLabel-root {
+    margin: 0;
+}
+
+.stake-wrapper .stake-tabs .nft-view-left-header .MuiButtonBase-root {
+    padding: 0px 5px;
+}
+
+.stake-wrapper .stake-tabs .nft-view-left-header .sort-btn {
+    display: block;
+    float: left;
+    margin: 5px;
+    padding: 5px 10px 5px 15px;
+    border-radius: 32px;
+    background-color: #1976d2;
+}
+
+.stake-wrapper .stake-tabs .nft-view-left-header .sort-btn:hover {
+    background-color: gray;
+}
+
+.stake-wrapper .stake-tabs .nft-view-left-header .sort-btn p {
+    display: block;
+    float: left;
+    margin: 3px 0px 0px 0px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.stake-wrapper .stake-tabs .nft-view-left-header .sort-btn i {
+    display: block;
+    float: left;
+    margin: 0;
+    font-size: 20px;
+    margin: 5px;
+}
+
+.stake-wrapper .stake-tabs .stake-tablist {
+    border-radius: 0px;
+    padding: 0px;
+}
+
+.stake-wrapper .stake-tabs .stake-tablist .stake-tab {
+    background-color: #f75cae;
+    border-radius: 0px;
+    margin: 1px;
+    color: white;
+    font-weight: 700;
+    height: 48px;
+}
+
+.stake-wrapper .stake-tabs .stake-tablist .selected-tab {
+    border-bottom: 3px solid white;
+}
+
+.stake-wrapper .stake-tabs .staked-chip {
+    background-color: #dc3545;
+    margin-left: 10px;
+    font-weight: 500;
+}
+
+.stake-wrapper .stake-tabs .unstaked-chip {
+    background-color: #17a2b8;
+    margin-left: 10px;
+    font-weight: 500;
+}
+
+.stake-wrapper .stake-tabs .stake-btn {
+    display: block;
+    float: left;
+    margin: 0 20px;
+    background-color: #f75cae;
+    border: 2px solid #f75cae;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.stake-wrapper .stake-tabs .stake-btn:hover {
+    border: 2px solid #f75cae;
+    background-color: transparent;
+    color: #f75cae;
+    font-weight: 600;
+}
+
+.stake-wrapper .stake-tabs .stake-pagenation {
+    display: block;
+    float: right;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-right: 10px;
+}
+
+.stake-wrapper .stake-tabs .stake-nft-view {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+}
+
+.stake-wrapper .row {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: fit-content;
+}
+
+.stake-wrapper .no-data {
+    max-width: 500px;
+    align-items: center;
+}
+
+.stake-wrapper .get-more-button {
+    margin: 20%;
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+    font-size: large;
+    font-weight: 500;
+}
+
+.realtime-data-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.realtime-data-wrapper .stake-streak-data {
+    background-color: #faaaff;
+    color: #606ae2;
+}
+
+.realtime-data-wrapper .accumulated-pal-data {
+    background-color: #606ae2;
+    color: #faaaff;
+}
+
+.claim-wrapper {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+}
+
+.claim-wrapper img {
+    max-height: 72px;
+}
+
+.claim-wrapper .claim-time-progress {
+    transform: rotate(-90deg) translate(67px, 0px) !important;
+    color: rgb(255 0 150 / 50%)
+}
+
+.claim-wrapper .claim-time-100-percent {
+    transform: rotate(-90deg) translate(149px, 0px) !important;
+    color: rgb(25 255 150 / 50%)
+}
+
+.claim-wrapper .btn {
+    background-image: url("../img/claim-btn-bg.png");
+    width: 90px;
+    height: 90px;
+    margin: 0;
+    padding: 6px;
+    border-radius: 50%;
+    margin-left: 20px;
+    background-size: contain;
+}
+
+.claim-wrapper .btn p {
+    font-size: 16px;
+    color: #9d490e;
+    font-weight: 700;
+    margin-top: 25px;
+}
+
+.claim-wrapper .btn:hover {
+    box-shadow: 0 3px 8px 0 rgb(0 0 0 / 75%);
+}
+
+.stake-unstake-all-wrapper {
+    width: 100%;
+    justify-content: flex-end;
+    padding-right: 15px !important;
+}
+
+.stake-unstake-all-wrapper .btn {
+    background-color: #351d35;
+    border: 2px solid #351d35;
+    color: white;
+    font-weight: 700;
+    margin-left: 10px;
+}
+
+.stake-unstake-all-wrapper .btn:hover {
+    background-color: transparent;
+    color: #351d35;
+}
+
+.whitepaper-wrapper {
+    padding: 50px 0px;
+}
+
+.whitepaper-wrapper .row {
+    margin: 0;
+    padding: 0;
+}
+
+.whitepaper-wrapper .title {
+    width: 100%;
+    margin: 0px 0px 30px 0px !important;
+    text-align: center;
+    font-size: 42px;
+}
+
+.whitepaper-wrapper .nft-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.whitepaper-wrapper .nft-wrapper .nft-viewer {
+    display: flex;
+    justify-content: center;
+}
+
+.whitepaper-wrapper .nft-wrapper .nft-viewer img {
+    max-width: 400px;
+    width: 100%;
+    height: fit-content;
+}
+
+.whitepaper-wrapper .nft-wrapper .nft-description {
+    display: flex;
+    justify-content: center;
+}
+
+.whitepaper-wrapper .nft-wrapper .nft-description .description {
+    max-width: 500px;
+    width: 100%;
+    margin-top: 20px;
+    line-height: 2;
+}
+
+.whitepaper-wrapper .tokenomics-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.whitepaper-wrapper .whitepaper-open-btn-wrapper {
+    display: flex;
+    justify-content: right;
+}
+
+.whitepaper-wrapper .whitepaper-open-btn-wrapper .btn {
+    width: 200px;
+    height: 48px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 700;
+    background-color: #6a3d5c;
+    border: 3px solid #6a3d5c;
+}
+
+.whitepaper-wrapper .whitepaper-open-btn-wrapper .btn:hover {
+    border: 3px solid #6a3d5c;
+    background-color: transparent;
+    color: #6a3d5c;
+}
+
+.penguins-wrapper {
+    padding: 50px 15px;
+}
+
+.penguins-wrapper .search-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.penguins-wrapper .search-box {
+    display: flex;
+}
+
+.penguins-wrapper .penguin-num-input {
+    max-width: 300px;
+    height: 42px;
+    background-color: white;
+    padding-left: 20px;
+    font-size: 14px;
+    border: 1px solid #8c8098;
+    border-radius: 0px;
+}
+
+.penguins-wrapper .penguin-num-input:focus {
+    border: 1px solid #351d35;
+}
+
+.penguins-wrapper button {
+    height: 42px;
+    border-radius: 0;
+    padding: 0px 12px;
+    background-color: #351d35;
+    border: 2px solid #351d35;
+    font-weight: 600;
+    font-size: 18px;
+    margin: 0px 0px 0px -46px;
+}
+
+.penguins-wrapper button:active {
+    background-color: #351d35;
+    border: 2px solid #351d35 !important;
+    color: white;
+}
+
+.penguins-wrapper button:focus {
+    background-color: #351d35;
+    border: 2px solid #351d35;
+    color: white;
+}
+
+.penguins-wrapper .rarity-view .card-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.penguins-wrapper .rarity-view .nft-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    background-color: rgb(255 255 255 / 50%);
+    border: 2px solid #f75cae;
+    border-radius: 32px;
+    overflow: hidden;
+}
+
+.penguins-wrapper .rarity-view .nft-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.penguins-wrapper .nft-info-wrapper .nft-id {
+    font-size: 22px;
+    color: #351d35;
+    font-weight: 600;
+}
+
+.penguins-wrapper .nft-info-wrapper .nft-info {
+    font-size: 18px;
+    color: #8c8098;
+    font-weight: 700;
+}
+
+.penguins-wrapper .rarity-view .nft-view {
+    max-width: 400px;
+    width: 100%;
+}
+
+.penguins-wrapper .rarity-view .rarity-table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.penguins-wrapper .rarity-view th {
+    background-color: #f75cae;
+    color: white;
+    padding: 7px 20px;
+    border: 1px solid #ffd4ff;
+    font-weight: 500;
+}
+
+.penguins-wrapper .rarity-view td {
+    background-color: #ffc0e1;
+    border: 1px solid #ffd4ff;
+    padding: 5px 10px;
+}

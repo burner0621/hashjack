@@ -1,0 +1,381 @@
+/*
+                    <div className="chatting-wrapper" onKeyDown={onChatkeyPress} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
+                        <input value={chatStr} onChange={(e) => { setChatStr(e.target.value) }} />
+                        <div className="sc-user-input--button">
+                            <EmojiIcon onEmojiPicked={_handleEmojiPicked} />
+                        </div>
+                        <Button onClick={onSendClick} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
+                            <SendIcon />
+                        </Button>
+                    </div>
+
+*/
+.main-container {
+    height: 100vh;
+    background-image: url("../../assets/imgs/front/home-background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    overflow: hidden;
+
+    .back-button {
+        position: absolute;
+        right: 400px;
+        bottom: 50px;
+        background-color: #673ab7;
+        width: 64px;
+        height: 64px;
+        border-radius: 32px;
+        color: white;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .account-info {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 220px;
+        height: 68px;
+        background-color: #ffffff80;
+        border-radius: 32px;
+        border-bottom: 5px solid #8b1832;
+
+        .MuiAvatar-root {
+            outline: 3px solid #8b1832;
+            background-color: white;
+            margin-left: -7px;
+        }
+
+        .account-info-str {
+            margin-left: 10px;
+            display: flex;
+            flex-direction: column;
+
+            p {
+                width: 130px; /* <----------------- required depeding of layout or parent */
+                text-overflow: ellipsis; /* <------ required */
+                white-space: nowrap; /* <---------- required */
+                overflow: hidden; /* <------------- required */
+                margin: 0;
+                padding: 0;
+                color: #723232;
+                font-size: 14px;
+                font-weight: 500;
+
+                &:first-child {
+                    font-size: 20px;
+                    font-weight: 700;
+                    color: #8b1832;
+                }
+            }
+
+        }
+
+    }
+
+    .total-map-wrapper {
+        .lands-wrapper {
+            position: absolute;
+            width: 240px;
+            top: 100px;
+            height: calc(100vh - 100px);
+            background-color: #00000080;
+
+            .MuiButtonBase-root {
+                display: flex;
+                flex-direction: row;
+                color: #ffe67f;
+                background-color:#202124;
+                font-weight: 700;
+                justify-content: left;
+
+                &:focus {
+                    outline: none;
+                }
+
+                .land-image {
+                    width: 64px;
+                    margin-right: 15px;
+                    border-radius: 100%;
+                    border: 1px solid #ffe67f;
+                }
+
+                .MuiTouchRipple-root {
+                    border-bottom: 1px solid #ffe67fa0;
+                }
+            }
+
+            .MuiTabScrollButton-vertical {
+                border: none;
+                background-color: #000000;
+                justify-content: center;
+            }
+
+            .MuiTabs-indicator {
+                width: 7px;
+                background-color: #ffe67f;
+            }
+        }
+    }
+
+    .single-map-wrapper {
+        position: absolute;
+        width: 300px;
+        height: 72px;
+        top: 10px;
+        right: 10px;
+        background-color: #ffffff80;
+        border-radius: 50px;
+        border-top: 7px solid #167e4f;
+        display: flex;
+        flex-direction: row;
+        justify-content: right;
+
+        .land-image {
+            width: 96px;
+            height: 96px;
+            margin-top: -8px;
+            margin-right: -8px;
+            border-radius: 100%;
+            border: 3px solid #167e4f;
+        }
+
+        .map-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: right;
+            margin-right: 10px;
+
+            p {
+                font-size: 20px;
+                font-weight: 700;
+                color: #167e4f;
+                margin: 0;
+                padding: 0;
+            }
+
+            .map-detail {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                width: 180px;
+                margin-top: 5px;
+
+                div {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                }
+
+                p {
+                    font-size: 16px;
+                    font-weight: 700;
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+        }
+    }
+
+    .chatting-wrapper {
+        position: absolute;
+        left: 30px;
+        bottom: 50px;
+
+        input {
+            width: 420px;
+            height: 48px;
+            border-radius: 24px;
+            border: none;
+            border-bottom: 5px solid #673ab7;
+            outline: none;
+            background-color: #00000010;
+            padding-left: 20px;
+        }
+
+        button {
+            background-color: #673ab7;
+            width: 64px;
+            height: 64px;
+            border-radius: 32px;
+            color: white;
+            margin-left: -42px;
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+
+    .chat-wrapper {
+        position: absolute;
+        bottom: 30px;
+        left: 170px;
+        display: flex;
+        flex-direction: row;
+        background-color: white;
+        border-radius: 32px;
+
+        .chat-text-input {
+            border: 1px solid #1976d2;
+            border-radius: 32px;
+            width: 420px;
+            height: 42px;
+            padding-left: 20px;
+            background: transparent;
+            color: #00000080;
+            font-size: 24;
+            font-weight: 700;
+        }
+
+        button {
+            &:focus {
+                border: none;
+                outline: none;
+            }
+        }
+    }
+
+    .edit-map-wrapper {
+        .draw-map-tool {
+            position: absolute;
+            top: 130px;
+            right: 0;
+            width: 320px;
+            height: calc(100vh - 130px);
+            background-color: #202124;
+
+            .MuiButtonBase-root {
+                width: 20px;
+                background-color: #202124;
+                color: wheat;
+
+                &:focus {
+                    outline: none;
+                }
+
+                span {
+                    background-color: transparent;
+                }
+            }
+
+            .MuiTab-root {
+                span {
+                    background-color: transparent;
+                }
+            }
+
+            span {
+                height: 4px;
+                background-color: wheat;
+            }
+
+            .map-content-wrapper {
+                width: 310px;
+                height: calc(100vh - 232px);
+                margin: 5px;
+                background-color: #505050;
+                overflow-y: auto;
+                overflow-x: hidden;
+
+                &::-webkit-scrollbar {
+                    width: 5px;
+                }
+
+                &::-webkit-scrollbar-track {
+                    background-color: transparent;
+                    border-radius: 100px;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background-color: rgba(200, 200, 200, 0.5);
+                    border-radius: 100px;
+                }
+
+                .single-map-tile {
+                    display: flex;
+                    position: relative;
+                    align-items: center;
+                    justify-content: center;
+                    aspect-ratio: 1;
+                    border: 1px solid #202124;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+.place-image {
+    border-radius: 100%;
+    border: 3px solid #167e4f;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    height: 100%;
+}
+
+.rating-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+  .counter-container {
+    color: #ffd54f;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  h1 {
+    font-weight: normal;
+    letter-spacing: .125rem;
+    text-transform: uppercase;
+  }
+  
+  li {
+    display: inline-block;
+    font-size: 1.5em;
+    list-style-type: none;
+    padding: 1em;
+    text-transform: uppercase;
+  }
+  
+  li span {
+    display: block;
+    font-size: 4.5rem;
+  }
+  
+  .emoji {
+    display: none;
+    padding: 1rem;
+  }
+  
+  .emoji span {
+    font-size: 4rem;
+    padding: 0 .5rem;
+  }
+  
+  @media all and (max-width: 768px) {
+    h1 {
+      font-size: calc(1.5rem * var(--smaller));
+    }
+    
+    li {
+      font-size: calc(1.125rem * var(--smaller));
+    }
+    
+    li span {
+      font-size: calc(3.375rem * var(--smaller));
+    }
+  }
